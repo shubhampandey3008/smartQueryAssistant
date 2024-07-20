@@ -1,14 +1,15 @@
 import pandas as pd
+import json
 
 def readCSV(file):
     df = pd.read_csv(file)
     print(df.head())
-    return df.columns.to_list()
+    return df.columns.to_list() , df
 
 def readExcel(file):
     df = pd.read_excel(file)
     print(df.head())
-    return df.columns.tolist()
+    return df.columns.tolist() , df
 
 def sendFileDesc(file):
 
@@ -20,8 +21,12 @@ def sendFileDesc(file):
     data = {}
 
     if extension == 'csv':
-        heading , data = readCSV(file)
+        heading , df = readCSV(file)
     else:
-        heading , data = readExcel(file)
+        heading , df = readExcel(file)
 
-    return heading
+    # Convert into json
+    data = df.to_json(orient='records')
+    
+
+    return heading , data
