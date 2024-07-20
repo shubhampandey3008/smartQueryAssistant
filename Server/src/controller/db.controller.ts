@@ -2,11 +2,8 @@ import { Request, Response } from "express";
 import { connection } from "../config/mysql.config";
 import run from "../geminiPrompt/prompt";
 
-export default async function postQuery(
-  req: Request,
-  res: Response
-): Promise<void> {
-  const question = req.body.question;
+export async function postQuery(req: Request, res: Response): Promise<void> {
+  const question: string = req.body.question;
   console.log(question);
 
   const pool = await connection();

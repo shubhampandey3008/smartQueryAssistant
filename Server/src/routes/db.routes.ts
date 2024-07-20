@@ -1,5 +1,5 @@
 import { Router } from "express";
-import postQuery from "../controller/db.controller";
+import { postQuery } from "../controller/db.controller";
 
 const dbRouter = Router();
 
