@@ -19,7 +19,7 @@ if file is not None:
 else:
     logger.debug("No file found")
 
-dataTypes = [ "int" , "varchar" , "Date" ]
+dataTypes = [ "int" , "varchar(100)" , "Date" ]
 
 
 

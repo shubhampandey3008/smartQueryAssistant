@@ -27,6 +27,7 @@ def sendFileDesc(file):
 
     # Convert into json
     data = df.to_json(orient='records')
+    # data = json.dumps(data)
     
 
     return heading , data
