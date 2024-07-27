@@ -5,6 +5,26 @@ import { Code } from "../enum/Code";
 import { HttpResponse } from "../domain/response";
 import { Status } from "../enum/Status";
 
+function getMetaDataStr(
+  strMetaData: string,
+  metaData: { [key: string]: string },
+  PrimaryKey: string
+) {
+  // Creating metadata to create table
+  for (let key in metaData) {
+    console.log(`The value of Primary key : ${PrimaryKey} , key : ${key}`);
+    if (PrimaryKey == key)
+      strMetaData = `${strMetaData} \`${key}\` ${metaData[key]} PRIMARY KEY ,`;
+    else strMetaData = `${strMetaData} \`${key}\` ${metaData[key]} ,`;
+
+    console.log(strMetaData);
+  }
+
+  strMetaData = `(${strMetaData.slice(0, -2)})`;
+
+  return strMetaData;
+}
+
 export default async function setMetadata(
   req: Request,
   res: Response
@@ -17,14 +37,39 @@ export default async function setMetadata(
 
   const tableName: string = jsonMetaData["tableName"];
   console.log(`The name of table is : ${tableName}`);
-  const metaData: string = `(${jsonMetaData["metaData"]})`;
-  console.log(`The metaData is : ${metaData}`);
+  const metaData: { [key: string]: string } = JSON.parse(
+    jsonMetaData["metaData"]
+  );
+
+  const PrimaryKey = jsonMetaData["Primary Key"];
+
+  const strMetaData: string = getMetaDataStr("", metaData, PrimaryKey);
+  console.log(strMetaData);
   try {
     const pool = await connection();
-    const createTable = await pool.query(QUERY.CREATE_TABLE, [
-      tableName,
-      metaData,
-    ]);
+    const createTable = await pool.query(
+      `CREATE TABLE \`${tableName}\` ${strMetaData}`
+    );
+
+    // Inserting Values to the created Table
+    const objects: Array<{ [key: string]: string }> = JSON.parse(
+      jsonMetaData["data"]
+    );
+
+    for (const data of objects) {
+      console.log(data);
+      const columns = Object.keys(data)
+        .map((value) => `\`${value}\``)
+        .join(", ");
+      const values = Object.values(data)
+        .map((value) => `'${value}'`)
+        .join(", ");
+
+      await pool.query(
+        `INSERT INTO \`${tableName}\` (${columns}) VALUES (${values})`
+      );
+    }
+
     return res
       .status(Code.OK)
       .send(new HttpResponse(Code.OK, Status.OK, `${tableName} Table Created`));
@@ -42,6 +87,7 @@ export default async function setMetadata(
   }
 }
 
+// To Drop the Table
 export async function dropTable(
   req: Request,
   res: Response
@@ -50,7 +96,8 @@ export async function dropTable(
 
   try {
     const pool = await connection();
-    const deleteTable = await pool.query(QUERY.DROP_TABLE, [tableName]);
+    const deleteTable = await pool.query(`DROP TABLE \`${tableName}\``);
+
     return res
       .status(Code.OK)
       .send(new HttpResponse(Code.OK, Status.OK, `${tableName} table dropped`));
