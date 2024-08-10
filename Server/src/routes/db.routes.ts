@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { postQuery } from "../controller/db.controller";
+import { postPlotQuery, postQuery, showTable } from "../controller/db.controller";
 
 const dbRouter = Router();
 
 dbRouter.post("/", postQuery);
+dbRouter.post("/plot" , postPlotQuery);
+dbRouter.post("/show" , showTable);
 
 export default dbRouter;
