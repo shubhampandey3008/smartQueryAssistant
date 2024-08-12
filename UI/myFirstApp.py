@@ -8,7 +8,6 @@ from loguru import logger
 import requests
 
 logger.add("logs_new.log")
-tableName=""
 
 st.title("SHEET:violet[chat]  :bar_chart:")
 
@@ -43,15 +42,13 @@ def sendData(option):
     st.write(option)
     # Packaging the final metaData along with the data
     metaData,tableName = getMD(file.name , headingOptions , data)
-    print(metaData)
+    if "tableName" not in st.session_state:
+        st.session_state["tableName"] = tableName
 
     try:
         response = requests.post(f"{os.getenv('NODE_API')}/metaData" , json ={"metaData" : metaData})
     except requests.exceptions.RequestException as e:
         print(f" An error occured : {e}")
-
-def getTableName():
-    return tableName
 
 if file and st.button("Submit"):
     sendData(headingOptions)

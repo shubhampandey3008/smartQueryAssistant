@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 import os
 import io
-from myFirstApp import getTableName
 
 
 
@@ -121,7 +120,7 @@ if prompt := st.chat_input("What is up?"):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    tableName = getTableName()
+    tableName = st.session_state["tableName"]
 
     # Identifying whether it is a plot Query or normal Query or show Query
     if isPlot(prompt):
