@@ -2,13 +2,13 @@ import pandas as pd
 import json
 
 def readCSV(file):
-    df = pd.read_csv(file)
-    print(df.head())
+    df = pd.read_csv(file , dtype=str)
+    df = df.dropna()
     return df.columns.to_list() , df
 
 def readExcel(file):
-    df = pd.read_excel(file)
-    print(df.head())
+    df = pd.read_excel(file , dtype=str)
+    df = df.dropna()
     return df.columns.tolist() , df
 
 def sendFileDesc(file):
