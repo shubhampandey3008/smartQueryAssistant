@@ -9,16 +9,13 @@ import { Pool } from "mysql2/promise";
 
 
 function getMetaDataStr(
-  strMetaData: string,
-  metaData: { [key: string]: string },
-  PrimaryKey: string
+  metaData: { [key: string]: string }
 ) {
+  let strMetaData = "SNO INT PRIMARY KEY AUTO_INCREMENT,";
   // Creating metadata to create table
   for (let key in metaData) {
-    console.log(`The value of Primary key : ${PrimaryKey} , key : ${key}`);
-    if (PrimaryKey == key)
-      strMetaData = `${strMetaData} \`${key}\` ${metaData[key]} PRIMARY KEY ,`;
-    else strMetaData = `${strMetaData} \`${key}\` ${metaData[key]} ,`;
+    console.log(`The value of key : ${key}`);
+    strMetaData = `${strMetaData} \`${key}\` ${metaData[key]} ,`;
 
     console.log(strMetaData);
   }
@@ -32,7 +29,7 @@ function getMetaDataStr(
 async function storeMetaData (pool : Pool , tableName : string , metaData : String) : Promise<void>
 {
   // Creating table if not exists
-  await pool.query(`CREATE TABLE IF NOT EXISTS STORE_META ( SNO INT PRIMARY KEY AUTO_INCREMENT , TABLENAME VARCHAR(100) , MDATA VARCHAR(100))`);
+  await pool.query(`CREATE TABLE IF NOT EXISTS STORE_META ( SNO INT PRIMARY KEY AUTO_INCREMENT , TABLENAME VARCHAR(100) , MDATA VARCHAR(500))`);
 
   await pool.query(`INSERT INTO STORE_META(TABLENAME , MDATA) VALUES("${tableName}" , "${metaData}")`);
 }
@@ -42,7 +39,7 @@ export default async function setMetadata(
   res: Response
 ): Promise<Response> {
   const metadata = req.body.metaData;
-  // console.log(metadata);
+  // console.log(metadata);strMetaData: string,
 
   //   Parsing the coming JSON
   const jsonMetaData = JSON.parse(metadata);
@@ -53,9 +50,9 @@ export default async function setMetadata(
     jsonMetaData["metaData"]
   );
 
-  const PrimaryKey = jsonMetaData["Primary Key"];
+  // const PrimaryKey = jsonMetaData["Primary Key"];
 
-  const strMetaData: string = getMetaDataStr("", metaData, PrimaryKey);
+  const strMetaData: string = getMetaDataStr(metaData);
   console.log(strMetaData);
   try {
     const pool = await connection();

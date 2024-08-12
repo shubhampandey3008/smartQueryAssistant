@@ -1,10 +1,16 @@
+from dotenv import load_dotenv
+load_dotenv()
+import os
+from fileInfoConnector import sendFileDesc
+from packagingData import getMD
 import streamlit as st
 from loguru import logger
-from packagingData import getMD
-from fileInfoConnector import sendFileDesc
 import requests
 
 logger.add("logs_new.log")
+tableName=""
+
+st.title("SHEET:violet[chat]  :bar_chart:")
 
 file = st.file_uploader("Upload csv/xlsx file" , ['csv' , 'xlsx'] , help="max size 200mb")
 
@@ -31,29 +37,25 @@ for heading in headings:
     if option != None:
         st.write("You Selected ", option)
 
-primaryKey = st.markdown("<br>", unsafe_allow_html=True) 
-
-
-# Showing the radio button only when the file is uploaded
-if file:
-    st.markdown("## Primary Key" )
-    isPrime = st.radio(label="label" , options=headings , key=primaryIter , label_visibility="collapsed")
-
 
 def sendData(option):
+    global tableName
     st.write(option)
     # Packaging the final metaData along with the data
-    metaData = getMD(file.name , headingOptions , isPrime , data)
+    metaData,tableName = getMD(file.name , headingOptions , data)
     print(metaData)
 
     try:
-        response = requests.post("http://192.168.1.9:3000/metaData" , json ={"metaData" : metaData})
+        response = requests.post(f"{os.getenv('NODE_API')}/metaData" , json ={"metaData" : metaData})
     except requests.exceptions.RequestException as e:
         print(f" An error occured : {e}")
 
+def getTableName():
+    return tableName
+
 if file and st.button("Submit"):
     sendData(headingOptions)
+    st.switch_page("pages/chatPage.py")
 
 
-# if st.button("")
         

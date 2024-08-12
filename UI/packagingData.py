@@ -1,7 +1,7 @@
 import json
 
-def getMD(fileName , headingOptions , isPrime , data):
+def getMD(fileName , headingOptions , data):
+    tableName = fileName.split(".")[-2].replace(" ","_")
+    package = json.dumps({"tableName" : tableName , "data" : data , "metaData" : json.dumps(headingOptions)})
 
-    package = json.dumps({"tableName" : fileName.split(".")[-2].replace(" ","_") , "data" : data , "metaData" : json.dumps(headingOptions) , "Primary Key" : isPrime})
-
-    return package
+    return package,tableName
