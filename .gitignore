@@ -1,0 +1,6 @@
+**/myvenv
+**/.env
+**/node_modules
+**/*.log
+**/venv
+**/**.log
