@@ -27,7 +27,7 @@ Traditional chatbots often stumble when performing complex calculations on sprea
 
 ## 🎥 Demo & Tutorial
 
-[![Sheetchat Demo](thumbnail.jpg)]([https://www.youtube.com/watch?v=YOUR_VIDEO_ID](https://www.youtube.com/watch?v=hYj-001-UzM&t=62s))
+[![Sheetchat Demo](thumbnail.png]([https://www.youtube.com/watch?v=YOUR_VIDEO_ID](https://www.youtube.com/watch?v=hYj-001-UzM&t=62s))
 *Click the image above to watch the demo video*
 
 
