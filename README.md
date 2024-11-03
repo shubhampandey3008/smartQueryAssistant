@@ -33,84 +33,76 @@ Traditional chatbots often stumble when performing complex calculations on sprea
 
 ## ✨ Features
 
-* Feature 1: Brief description
-* Feature 2: Brief description
-* Feature 3: Brief description
+* **Natural Language Data Interaction**
+  * Chat naturally with your Excel and CSV files
+  * Automatic switching between table views and text responses based on context
+  * Generate visualizations using the "plot" keyword (e.g., "plot line graph of sales")
+
+* **Smart Data Processing**
+  * SQL-powered calculations for accurate results
+  * Two-step LLM processing: Natural Language → SQL → Natural Language
+  * Handles complex queries and calculations efficiently
+
+* **Dynamic Data Management**
+  * Modify database through natural language commands
+  * Create and manage different views of your data
+  * Download processed data in various formats:
+    * Custom views as new Excel files
+    * Modified database tables
+    * Query results in desired format
+
+* **Intelligent Output Handling**
+  * Automatic table formatting for structured data
+  * Natural language responses for insights
+  * Visual plots for trend analysis
 
 ## 🛠️ Technologies Used
 
-* Frontend: [e.g., React, Vue]
-* Backend: [e.g., Node.js, Django]
-* Database: [e.g., MongoDB, PostgreSQL]
-* Deployment: [e.g., Heroku, Vercel]
 
-## ⚙️ Installation
+Frontend
 
-```bash
-# Clone the repository
-git clone https://github.com/username/project-name.git
+Streamlit: Main web application framework
+Pyplot: Data visualization and plotting
+Additional Libraries:
 
-# Navigate to the project directory
-cd project-name
+streamlit-extras: Enhanced UI components
+pandas: Data manipulation and analysis
 
-# Install dependencies
-npm install
 
-# Set up environment variables
-cp .env.example .env
-```
 
-## 🚦 Usage
+Backend
 
-```bash
-# Run development server
-npm run dev
+Node.js: Runtime environment
+TypeScript: Programming language
+Express.js: Web application framework
+Google Cloud Platform (GCP): Cloud deployment
 
-# Build for production
-npm run build
+Cloud Run: Container deployment
+Cloud SQL: Database hosting
 
-# Run tests
-npm test
-```
 
-## 📁 Project Structure
 
-```
-src/
-├── components/
-├── pages/
-├── utils/
-└── ...
-```
+Database
 
-## 🔑 Environment Variables
+MySQL: Primary database
 
-```
-DATABASE_URL=
-API_KEY=
-```
+Data storage and querying
+Dynamic view management
 
-## 📝 API Documentation
 
-Document your API endpoints if applicable:
 
-### `GET /api/items`
-- Description: Fetches all items
-- Response: Array of items
+AI/ML
 
-## 🤝 Contributing
+Google Gemini: LLM for natural language processing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Query translation
+Response generation
 
-## 📜 License
 
-This project is licensed under the [MIT License](LICENSE)
 
-## 👏 Acknowledgments
+DevOps
 
-* Credit any third-party assets, libraries, or resources you used
-* Thank contributors or mentors
+Docker: Containerization
+GCP Cloud Build: CI/CD pipeline
+
+
