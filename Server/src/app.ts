@@ -8,6 +8,7 @@ import { Status } from "./enum/Status";
 import { HttpResponse } from "./domain/response";
 import patientRoutes from "./routes/patients.routes";
 import dbRouter from "./routes/db.routes";
+import mdRouter from "./routes/md.routes";
 
 export class App {
   private readonly app: Application;
@@ -35,6 +36,7 @@ export class App {
         .send(new HttpResponse(Code.OK, Status.OK, "Welcome to our Website"));
     });
     this.app.use("/dbQuery", dbRouter);
+    this.app.use("/metaData", mdRouter);
     this.app.all("*", (req, res) =>
       res
         .status(404)

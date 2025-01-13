@@ -1,0 +1,10 @@
+runtime: nodejs16
+
+env_variables:
+  INSTANCE_CONNECTION_NAME: unique-alloy-438013-d6:us-central1:sheetchat-us-central-1-mysql
+  DB_USER: root
+  DB_PASS: Shubham#Pandey@123
+  DB_NAME: RnD
+
+beta_settings:
+  cloud_sql_instances: unique-alloy-438013-d6:us-central1:sheetchat-us-central-1-mysql

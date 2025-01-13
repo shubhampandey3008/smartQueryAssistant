@@ -1,8 +1,12 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "engines": {
+    "node": "18.20.4"
+  },
   "main": "index.js",
   "scripts": {
+    "start" : "node dist/index.js",
     "start:build": "tsc -p .",
     "start:dev": "nodemon --exec ts-node src/index.ts",
     "start:prod": "tsc -p . node dist/index.js"
