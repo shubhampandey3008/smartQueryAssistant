@@ -7,7 +7,7 @@ import streamlit as st
 from loguru import logger
 import requests
 
-logger.add("logs_new.log")
+# logger.add("logs_new.log")
 
 st.title("SHEET:violet[chat]  :bar_chart:")
 
@@ -20,9 +20,9 @@ data=""
 # process the file
 if file is not None:
     headings , data = sendFileDesc(file)
-    logger.info("Added the file")
+    # logger.info("Added the file")
 else:
-    logger.debug("No file found")
+    print("No such file exist")
 
 dataTypes = [ "int" , "varchar(100)" , "Date" ]
 

@@ -10,6 +10,9 @@ export const connection = async () => {
     database: process.env.DB_NAME,
     port: 3306 || process.env.DB_PORT,
     connectionLimit: 10 || process.env.DB_CONNECTION_LIMIT,
+    // ssl: {
+    //   ca : process.env.SSL_CA
+    // }
   });
 
   return pool;

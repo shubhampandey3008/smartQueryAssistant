@@ -1,0 +1,10 @@
+runtime: python310
+entrypoint: streamlit run --server.port=$PORT app.py
+
+handlers:
+- url: /.*
+  script: auto
+
+env_variables:
+  STREAMLIT_SERVER_PORT: $PORT
+  NODE_API : https://unique-alloy-438013-d6.ue.r.appspot.com
